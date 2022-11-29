@@ -7,8 +7,9 @@
       ansible.builtin.debug: 
         msg: This is my URL {{URL}}
 
-  vars:
-      URL: Yahoo.co.in  
+    
     - name: this is from play2
       ansible.builtin.debug: 
         msg: This is my new URL {{URL}}
+      vars:
+      URL: Yahoo.co.in
