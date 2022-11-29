@@ -6,6 +6,7 @@
     - name: this is from play1
       ansible.builtin.debug: 
         msg: This is my URL {{URL}}
+        
 
     - name: this is from play2
       ansible.builtin.debug: 
