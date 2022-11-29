@@ -1,8 +1,8 @@
-name: demo print
-hosts: all
-vars: 
-  URL: google.co.in
-tasks: 
-  - name: this is from play1
-    ansible.builtin.debug: 
-      msg: This is my URL {{URL}}
+- name: demo print
+  hosts: all
+  vars: 
+    URL: google.co.in
+  tasks: 
+    - name: this is from play1
+      ansible.builtin.debug: 
+        msg: This is my URL {{URL}}
