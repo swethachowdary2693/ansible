@@ -45,8 +45,9 @@
   when: plugin_info.rc == 0
   block:
       - name: Copy the SQL uninstall passwor plugin file
-        src: password-validate.sql
-        dest: /tmp/password-validate.sql
+        ansible.built.copy: 
+          src: password-validate.sql
+          dest: /tmp/password-validate.sql
       
       - name: Uninstall plugin
         ansible.builtin.shell: mysql --connect-expired-password -uroot p{{password}}
