@@ -6,7 +6,19 @@
 - name: Donwload and extract the file
   ansible.builtin.unarchive:
     src: https://github.com/stans-robot-project/frontend/archive/main.zip
-    dest: //usr/share/nginx/html
+    dest: /tmp
     remote_src: yes
+
+- name: Clean up of the existing files
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    status: absent
+
+- name: copy file
+  ansible.builtin.copy: 
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
 
 
