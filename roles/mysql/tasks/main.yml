@@ -18,7 +18,7 @@
   community.mysql.mysql_info:
     login_user: root 
     login_password: "{{password}}"
-  Ignore_errors: yes
+  ignore_errors: yes
   register: mysql_stat
 
 - name: Reset password
@@ -39,7 +39,7 @@
 - name: Uninstall validate_password plugin
   ansible.builtin.shell: echo show plugins |  mysql -uroot -p{{password}} | grep validate_password
   register: Plugin_Info
-  Ignore_errors: yes
+  ignore_errors: yes
 
 - name: Uninstall plugin
   when: plugin_info.rc == 0
