@@ -1,1 +1,1 @@
-ALTER USER 'root'@'localhost' IDENTIFIED BY '{{password}}'
+ALTER USER 'root'@'localhost' IDENTIFIED BY '{{password}}';
