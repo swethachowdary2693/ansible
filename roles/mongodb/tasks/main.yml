@@ -4,7 +4,7 @@
     dest: /etc/yum.repos.d/mongodb.rep
 
 - name: Intalling MongoDB
-  ansible:builtin.yum:
+  ansible.builtin.yum:
     name: mongodb-org
     state: present
 
