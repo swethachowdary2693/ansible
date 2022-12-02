@@ -18,11 +18,10 @@
     path: /home/{{Appuser}}//{{Component}}/
     state: absent
 
-- name: Donwload and extract the file
-  ansible.builtin.unarchive:
-    src: https://github.com/stans-robot-project/{{Component}}/archive/main.zip
-    dest: /tmp
-    remote_src: yes
+- name: adding user {{Appuser}}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download_extract 
     
 - name: copy file to appuser 
   ansible.builtin.copy: 
