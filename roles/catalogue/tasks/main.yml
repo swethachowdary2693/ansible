@@ -29,7 +29,7 @@
     src: /tmp/{{Component}}-main/static/
     dest: /home/{{Appuser}}//{{Component}}/
     remote_src: yes
-    become_user: "{{Appuser}}"
+  become_user: "{{Appuser}}"
 
 - name: Npm Install
   community.general.npm:
