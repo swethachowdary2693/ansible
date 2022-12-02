@@ -49,9 +49,9 @@
   ignore_errors: true 
 
 - name: Uninstall plugin
-  when: plugin_Info.rc == 0
+  when: Plugin_Info.rc == 0
   block:
-      - name: Copy the SQL uninstall passwor plugin file
+      - name: Copy the SQL uninstall password plugin file
         ansible.builtin.copy: 
           src: password-validate.sql
           dest: /tmp/password-validate.sql
