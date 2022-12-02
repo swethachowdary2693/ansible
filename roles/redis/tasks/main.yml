@@ -10,11 +10,13 @@
 
 - name: updating {{Component}} config
   ansible.builtin.replace:
-    path: 
-      - /etc/{{Component}}.conf
-      - /etc/{{Component}}/{{Component}}.conf
+    path: "{{item}}"
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
+  loop:
+    - /etc/{{Component}}.conf
+    - /etc/{{Component}}/{{Component}}.conf
+    
 
 - name: Starting redis
   ansible.builtin.service:
