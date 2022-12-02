@@ -1,0 +1,23 @@
+- name: Getting Redis Repo
+  ansible.builtin.copy:
+    src: redis.repo
+    dest: /etc/yum.repos.d/redis.repo
+  
+- name: Intalling {{Component}}
+  ansible.builtin.yum:
+    name: redis-6.2.7
+    state: present
+
+- name: updating {{Component}} config
+  ansible.builtin.replace:
+    path: 
+      - /etc/{{Component}}.conf
+      - /etc/{{Component}}/{{Component}}.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Starting redis
+  ansible.builtin.service:
+    name: redis
+    state: started 
+    enabled: yes
