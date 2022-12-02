@@ -1,0 +1,23 @@
+- name: Setup MongoDB repository
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongodb.rep
+
+- name: Intalling MongoDB
+  ansible:builtin.yum:
+    name: mondogo-org
+    state: present
+
+- name: updating mongodb config
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Starting mongodb
+  ansible.builtin.service:
+    name: mongodb
+    state: started 
+    enabled: yes
+
+    
