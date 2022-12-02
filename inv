@@ -1,7 +1,7 @@
 [frontend]
 172.31.31.249
 
-[mondodb]
+[mongodb]
 172.31.18.165
 
 [catalogue]
