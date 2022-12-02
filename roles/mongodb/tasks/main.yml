@@ -5,7 +5,7 @@
 
 - name: Intalling MongoDB
   ansible:builtin.yum:
-    name: mondogo-org
+    name: mongodb-org
     state: present
 
 - name: updating mongodb config
