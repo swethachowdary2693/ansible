@@ -7,8 +7,8 @@
   ansible.builtin.yum:
     name: 
       - mysql-community-server
-      - Mysql-python
-
+      - MySQL-python
+      
     state: present
 
 - name: Starting mongodb
@@ -34,7 +34,7 @@
       - name: Display
         debug:
           msg: "{{Default_password}}"
-          
+
       - name: copy the SQL password
         ansible.builtin.copy:
           src: rootpassword.sql
