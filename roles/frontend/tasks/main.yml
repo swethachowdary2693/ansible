@@ -12,7 +12,7 @@
 - name: Clean up of the existing files
   ansible.builtin.file:
     path: /usr/share/nginx/html
-    status: absent
+    state: absent
 
 - name: copy file
   ansible.builtin.copy: 
