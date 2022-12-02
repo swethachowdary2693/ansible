@@ -8,7 +8,7 @@
     name: 
       - mysql-community-server
       - MySQL-python
-      
+
     state: present
 
 - name: Starting mongodb
@@ -41,7 +41,7 @@
           dest: /tmp/rootpassword.sql
 
       - name: Changing password
-        ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{Default_password.stdout}}" 
+        ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{Default_password.stdout}}" < /tmp/rootpassword.sql
 
 - name: Uninstall validate_password plugin
   ansible.builtin.shell: echo show plugins |  mysql -uroot -p{{password}} | grep validate_password
