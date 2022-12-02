@@ -1,6 +1,4 @@
-- name: copy file to appuser 
-  ansible.builtin.copy: 
-    src: /tmp/{{Component}}-main/
-    dest: /home/{{Appuser}}//{{Component}}/
-    remote_src: yes
-  become_user: "{{Appuser}}"
+- name: create user
+  ansible.builtin.user: 
+    user: "{{Appuser}}"
+    
