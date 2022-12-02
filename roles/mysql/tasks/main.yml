@@ -49,7 +49,7 @@
   ignore_errors: true 
 
 - name: Uninstall plugin
-  when: plugin_info.rc == 0
+  when: plugin_Info.rc == 0
   block:
       - name: Copy the SQL uninstall passwor plugin file
         ansible.builtin.copy: 
