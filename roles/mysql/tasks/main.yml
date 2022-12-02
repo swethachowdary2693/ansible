@@ -7,7 +7,7 @@
   ansible.builtin.yum:
     name: 
       - mysql-community-server
-      - MySQL-python
+      - Mysql-python
 
     state: present
 
@@ -30,7 +30,11 @@
       - name: Fetching password
         ansible.builtin.shell: grep "temporary" /var/log/mysqld.log | head -n 1 | awk -F " " '{print $NF}'
         register: Default_password
-      
+
+      - name: Display
+        debug:
+          msg: "{{Default_password}}"
+          
       - name: copy the SQL password
         ansible.builtin.copy:
           src: rootpassword.sql
