@@ -3,7 +3,7 @@
     name: nginx 
     state: present
 
-- name: adding user {{Appuser}}
+- name: Donwload and extract 
   ansible.builtin.include_role:
     name: common
     tasks_from: download_extract 

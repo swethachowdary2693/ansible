@@ -1,0 +1,63 @@
+- name: Setup mysql repository
+  ansible.builtin.copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/{{Component}}.repo
+
+- name: Intalling {{Component}}
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: present
+
+- name: Starting mongodb
+  ansible.builtin.service:
+    name: mysqld
+    state: started 
+    enabled: yes
+
+- name: Fetch the default password
+  community.mysql.mysql_info:
+    login_user: root 
+    login_password: "{{password}}"
+  Ignore_errors: yes
+  register: mysql_stat
+
+- name: Reset password
+  when: mysql_start.failed
+  block:
+      - name: Fetching password
+        ansible.builtin.shell: grep "temporary" /var/log/mysqld.log | head -n 1 | awk -F " " '{print $NF}'
+        register: Default_password
+      
+      - name: copy the SQL password
+        ansible.builtin.copy:
+        src: rootpassword.sql
+        dest: /tmp/rootpassword.sql
+
+      - name: Changing password
+        ansible.builtin.shell: mysql --connect-expired-password -uroot -p{{Default_password.stdout}} 
+
+- name: Uninstall validate_password plugin
+  ansible.builtin.shell: echo show plugins |  mysql -uroot -p{{password}} | grep validate_password
+  register: Plugin_Info
+  Ignore_errors: yes
+
+- name: Uninstall plugin
+  when: plugin_info.rc == 0
+  block:
+      - name: Copy the SQL uninstall passwor plugin file
+        src: password-validate.sql
+        dest: /tmp/password-validate.sql
+      
+      - name: Uninstall plugin
+        ansible.builtin.shell: mysql --connect-expired-password -uroot p{{password}}
+
+- name: download and extract 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download_extract
+
+- name: Load the {{Component}} schema
+  community.mysql.mysql_db:
+    state: import
+    login_user: root
+    login_password: "{{password}}"
