@@ -32,7 +32,7 @@
     become_user: "{{Appuser}}"
 
 - name: Npm Install
-  community.general.pm:
+  community.general.npm:
     path: /home/{{Appuser}}//{{Component}}/
   
 
