@@ -34,6 +34,19 @@
 - name: Npm Install
   community.general.npm:
     path: /home/{{Appuser}}//{{Component}}/
+
+- name: copy systemd file
+  ansible.builtin.copy:
+    src: systemd.service
+    dest: /etc/systemd/system/{{Component}}.service
+
+- name: Starting the {{Component}}
+  ansible.builtin.systemd:
+    name: "{{Component}}" 
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
+
   
 
 
