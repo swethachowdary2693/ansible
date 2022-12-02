@@ -57,7 +57,7 @@
           dest: /tmp/password-validate.sql
       
       - name: Uninstall plugin
-        ansible.builtin.shell: mysql --connect-expired-password -uroot p{{password}}
+        ansible.builtin.shell: mysql --connect-expired-password -uroot p{{password}} < /tmp/password-validate.sql
 
 - name: download and extract 
   ansible.builtin.include_role:
