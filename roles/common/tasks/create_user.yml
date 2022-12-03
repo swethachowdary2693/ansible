@@ -2,3 +2,7 @@
   ansible.builtin.user: 
     user: "{{Appuser}}"
   register: user_details
+
+- name: user
+  debug:
+    msg: "{{user_details}}"
