@@ -1,5 +1,5 @@
 - name: Setup Yum repository 
-  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/{{Component}}/{{Component}}-server/script.rpm.sh | bash
 
 - name: Install Rabbitmq and erlang 
   ansible.builtin.yum:  
@@ -23,3 +23,8 @@
     read_priv: .*
     write_priv: .*
     state: present
+
+- name: Setup hostname and disable auto shut down 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname 

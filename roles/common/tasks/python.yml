@@ -18,7 +18,7 @@
   
 - name: Install python dependencies
   ansible.builtin.pip:
-    requirements: /home/roboshop/payment/requirements.txt
+    requirements: /home/roboshop/{{Component}}/requirements.txt
     executable: pip3 
 
 - name: update Gid in {{Component}}.ini file
@@ -38,3 +38,7 @@
     name: common
     tasks_from: systemd_service
 
+- name: Setup hostname and disable auto shut down 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname 

@@ -23,3 +23,8 @@
   ansible.builtin.include_role:
     name: common
     tasks_from: systemd_service
+
+- name: Setup hostname and disable auto shut down 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname 
