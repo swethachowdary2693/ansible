@@ -2,7 +2,7 @@
   ansible.builtin.file:
     path: /home/{{Appuser}}//{{Component}}/
     state: absent
-    ignore_errors: true 
+  ignore_errors: true 
 
 - name: donwload and extract 
   ansible.builtin.include_role:
