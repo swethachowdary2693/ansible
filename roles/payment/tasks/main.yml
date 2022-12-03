@@ -1,0 +1,41 @@
+- name: Install python 3
+  ansible.builtin.yum:
+    name: 
+      - python36
+      - gcc
+      - python3-devel
+  state: installed
+
+- name: Create user
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create_user
+
+- name: clean download and extract
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: clean_downextrct
+  
+- name: Install python dependencies
+  ansible.builtin.pip:
+    requirements: /home/roboshop/payment/requirements.txt
+    executable: pip3.3
+
+- name: update Gid in {{Component}}.ini file
+  ansible.builtin.lineinfile:
+    path: /home/{{Appuser}}/{{Component}}/{{Component}}.ini
+    regexp: '^gid'
+    line: gid = {{Appuser_details.group}}\
+
+- name: update Uid in {{Component}}.ini file
+  ansible.builtin.lineinfile:
+    path: /home/{{Appuser}}/{{Component}}/{{Component}}.ini
+    regexp: '^uid'
+    line: uid = {{Appuser_details.uid}}
+
+- name: system restart
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd_service
+
+

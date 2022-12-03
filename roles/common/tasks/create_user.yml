@@ -1,4 +1,4 @@
 - name: create user
   ansible.builtin.user: 
     user: "{{Appuser}}"
-    
+  register: Appuser_details
