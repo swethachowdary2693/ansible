@@ -4,7 +4,7 @@
       - python36
       - gcc
       - python3-devel
-  state: installed
+    state: installed
 
 - name: Create user
   ansible.builtin.include_role:
