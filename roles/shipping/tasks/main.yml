@@ -13,6 +13,12 @@
     name: common
     tasks_from: clean_downextrct
 
+- name: Generating package 
+  ansible.builtin.shell: mvn clean package && mv target/shipping-1.0.jar shipping.jar
+  become_user: "{{Appuser}}"
+  args:
+    chgdir: /home/{{Appuser}}//{{Component}}/
+
 - name: start service
   ansible.builtin.include_role:
     name: common
