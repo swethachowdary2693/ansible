@@ -1,0 +1,25 @@
+- name: Setup Yum repository 
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+
+- name: Install Rabbitmq and erlang 
+  ansible.builtin.yum:  
+    name:   
+      - https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm 
+      - rabbitmq-server
+  state: Installed
+
+- name: Starting the {{Component}}
+  ansible.builtin.systemd:
+    name: "{{Component}}" 
+    state: started
+    enabled: yes
+
+- name: Created rabbitmq user and giving privilages
+  community.rabbitmq.rabbitmq_user:
+    user: "{{Appuser}}"  
+    password: "{{Password}}"
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
