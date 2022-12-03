@@ -10,7 +10,7 @@
 
 - name: Starting the {{Component}}
   ansible.builtin.systemd:
-    name: "{{Component}}" 
+    name: "{{server}}" 
     state: started
     enabled: yes
 
