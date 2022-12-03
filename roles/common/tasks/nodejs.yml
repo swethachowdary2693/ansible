@@ -13,38 +13,28 @@
     name: common
     tasks_from: create_user 
 
-- name: Clean up of the existing files
-  ansible.builtin.file:
-    path: /home/{{Appuser}}//{{Component}}/
-    state: absent
-
-- name: adding user {{Appuser}}
+- name: clean up, donwload and extract 
   ansible.builtin.include_role:
     name: common
-    tasks_from: download_extract 
+    tasks_from: clean_downextrct 
     
-- name: copy file to appuser 
-  ansible.builtin.copy: 
-    src: /tmp/{{Component}}-main/
-    dest: /home/{{Appuser}}//{{Component}}/
-    remote_src: yes
-  become_user: "{{Appuser}}"
-
 - name: Npm Install
   community.general.npm:
     path: /home/{{Appuser}}//{{Component}}/
 
-- name: copy systemd file
-  ansible.builtin.copy:
-    src: systemd.service
-    dest: /etc/systemd/system/{{Component}}.service
+- name: updating systemd and starting the service 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd_service 
 
-- name: Starting the {{Component}}
-  ansible.builtin.systemd:
-    name: "{{Component}}" 
-    state: restarted
-    enabled: yes
-    daemon-reload: yes
+- name: Generating package 
+  ansible.builtin.shell: mvn clean package && mv target/shipping-1.0.jar shipping.jar
+  become_user: "{{Appuser}}"
+  args:
+    chgdir: /home/{{Appuser}}//{{Component}}/
+
+
+
 
   
 

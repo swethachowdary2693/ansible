@@ -20,7 +20,7 @@
     state: started 
     enabled: yes
 
-- name: adding user {{Appuser}}
+- name: download and extract
   ansible.builtin.include_role:
     name: common
     tasks_from: download_extract
