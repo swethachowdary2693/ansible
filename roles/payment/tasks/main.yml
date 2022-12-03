@@ -25,7 +25,7 @@
   ansible.builtin.lineinfile:
     path: /home/{{Appuser}}/{{Component}}/{{Component}}.ini
     regexp: '^gid'
-    line: gid = {{user_details.group}}\
+    line: gid = {{user_details.group}}
 
 - name: update Uid in {{Component}}.ini file
   ansible.builtin.lineinfile:
