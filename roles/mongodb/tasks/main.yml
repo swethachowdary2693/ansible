@@ -10,9 +10,10 @@
 
 - name: updating mongodb config
   ansible.builtin.replace:
-    path: /etc/{{Component}}.conf/
+    path: /etc/{{Component}}.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
+  ignore_errors: true
   
 - name: Starting mongodb
   ansible.builtin.service:
