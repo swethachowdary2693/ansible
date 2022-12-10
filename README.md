@@ -7,7 +7,7 @@ Main important thing that we need to ensure is our Ansible machine should be abl
 
 As Ansible is a python tool installed python 3 and then installed ansible. 
 
-sudo yum intall python3-pip -y
+sudo yum install python3-pip -y
 sudo pip3 install pip --upgrade
 sudo pip3 install ansible
 
