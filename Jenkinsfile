@@ -9,7 +9,7 @@ pipeline {
 
         stage('lint checks') {    //This is to perform lint checks
             steps {
-                sh "Performing lint checks"
+                sh "echo Performing lint checks"
             }
         }  
 
@@ -17,7 +17,7 @@ pipeline {
             when { branch 'main'}
             steps {
                 sh "echo"
-                sh "I am main branch"
+                sh " echo I am main branch"
             }
         }
 
