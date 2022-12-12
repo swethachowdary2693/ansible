@@ -6,8 +6,9 @@ pipeline {
     }
 
     stages {
-
+        
         stage('lint checks') {    //This is to perform lint checks
+        when { branch pattern: "feature-.*", comparator: "REGEXP" }    
             steps {
                 sh "echo Performing lint checks"
             }
