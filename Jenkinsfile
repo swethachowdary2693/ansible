@@ -23,7 +23,7 @@ pipeline {
         }
 
         stage('Tag') {
-            when { expression { TAG_NAME ==~ ".*"}}
+            when { expression { env.TAG_NAME =! null }}
             steps {
                 sh "echo"
                 sh "echo Against tag"
