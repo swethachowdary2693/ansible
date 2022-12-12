@@ -30,3 +30,5 @@ ansible_password      :    password
 Directory   :   A key value pair is called directory
 List        :   A key with multiple values is called list
 Map         :   A key with multiple key value pairs is called map. 
+
+## Ansible pull needs ansible to be installed.
